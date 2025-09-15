@@ -1056,6 +1056,11 @@ MonoBehaviour:
   bulletSpeed: 10
   bulletDestroyDelay: 3
   bulletRotation: {x: 0, y: 0, z: 0.70710677, w: 0.70710677}
+  laserFireSfx: {fileID: 8300000, guid: cf1059e9c28af244c848f5afe2915afb, type: 3}
+  plasmaFireSfx: {fileID: 8300000, guid: 0474a9a330563dd4ea3540526b1f3062, type: 3}
+  lightningFireSfx: {fileID: 8300000, guid: f5356ace51766594996941cb3fae5184, type: 3}
+  sfxVolume: 1
+  pitchJitter: {x: 0.97, y: 1.03}
 --- !u!114 &2134375583
 MonoBehaviour:
   m_ObjectHideFlags: 0

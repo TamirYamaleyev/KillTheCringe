@@ -25,10 +25,20 @@ public class PlayerController : MonoBehaviour
 
     private float halfPlayerWidth;
     private float horizontalLimit;
-
-
+    
 
     public Quaternion bulletRotation = Quaternion.Euler(0f, 0f, 90f);
+    
+    // --- SFX ---
+    [Header("SFX")]
+    [SerializeField] AudioClip laserFireSfx;
+    [SerializeField] AudioClip plasmaFireSfx;
+    [SerializeField] AudioClip lightningFireSfx;
+
+    [SerializeField, Range(0f,1f)] float sfxVolume = 1f;
+    [SerializeField] Vector2 pitchJitter = new Vector2(0.97f, 1.03f);
+
+    AudioSource sfx;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -42,6 +52,13 @@ public class PlayerController : MonoBehaviour
         float screenHalfWidth = cam.orthographicSize * cam.aspect;
 
         horizontalLimit = screenHalfWidth - halfPlayerWidth;
+        
+        // SFX source
+        sfx = gameObject.AddComponent<AudioSource>();
+        sfx.playOnAwake = false;
+        sfx.loop = false;
+        sfx.spatialBlend = 0f;  
+        sfx.dopplerLevel = 0f;
     }
 
     // Update is called once per frame
@@ -88,6 +105,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = Instantiate(laserProjectile, firePoint.transform.position, bulletRotation);
         bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, bulletSpeed);
+        PlaySfx(laserFireSfx);
         Destroy(bullet, bulletDestroyDelay);
     }
 
@@ -95,12 +113,14 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = Instantiate(plasmaProjectile, firePoint.transform.position, bulletRotation);
         bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, bulletSpeed);
+        PlaySfx(plasmaFireSfx);
         Destroy(bullet, bulletDestroyDelay);
     }
 
     void ShootLightning()
     {
         gameObject.GetComponent<LightningWeapon>().FireLightning();
+        PlaySfx(lightningFireSfx);
     }
 
     public void TakeDamage()
@@ -116,6 +136,13 @@ public class PlayerController : MonoBehaviour
         {
             GameOver();
         }
+    }
+    
+    void PlaySfx(AudioClip clip)
+    {
+        if (!clip || sfx == null) return;
+        sfx.pitch = Random.Range(pitchJitter.x, pitchJitter.y);
+        sfx.PlayOneShot(clip, sfxVolume);
     }
 
     public void GameOver()
