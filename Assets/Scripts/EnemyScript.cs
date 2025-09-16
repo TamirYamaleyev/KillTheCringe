@@ -27,6 +27,9 @@ public class EnemyScript : MonoBehaviour
 
     public int scoreToGive = 10;
 
+    public GameObject weaponBox;
+    public float boxDropChance = 0.2f;
+
     void Awake()
     {
         sr = GetComponent<SpriteRenderer>();
@@ -87,8 +90,17 @@ public class EnemyScript : MonoBehaviour
         waveController.UnregisterEnemy();
 
         AddScore(scoreToGive);
+        CheckIfToDropWeaponBox();
         Destroy(gameObject);
 
+    }
+
+    public void CheckIfToDropWeaponBox()
+    {
+        if (boxDropChance >= Random.Range(0f, 1f))
+        {
+            Instantiate(weaponBox, firePoint.transform.position, Quaternion.identity);
+        }
     }
 
     IEnumerator ShootLoop()

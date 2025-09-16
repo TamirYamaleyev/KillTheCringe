@@ -80,10 +80,12 @@ public class PlayerController : MonoBehaviour
                 case Weapon.PlasmaCannon:
                     ShootPlasma();
                     plasmaAmmo--;
+                    // HUD Reduce ammo
                     break;
                 case Weapon.Lightning:
                     ShootLightning();
                     lightningAmmo--;
+                    // HUD Reduce ammo
                     break;
             }
         }
@@ -96,10 +98,12 @@ public class PlayerController : MonoBehaviour
             case Weapon.PlasmaCannon:
                 plasmaAmmo = ammo;
                 currentWeapon = Weapon.PlasmaCannon;
+                // HUD Change icon + max ammo
                 break;
             case Weapon.Lightning:
                 lightningAmmo = ammo;
                 currentWeapon = Weapon.Lightning;
+                // HUD Change icon + max ammo
                 break;
             default: currentWeapon = Weapon.Laser;
                 break;
