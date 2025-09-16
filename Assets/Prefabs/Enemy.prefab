@@ -290,3 +290,7 @@ MonoBehaviour:
   projectile: {fileID: 4122191502934974842, guid: d17a335905da6664e9b2c37c90c2c251, type: 3}
   firePoint: {fileID: 2541270729811081772}
   scoreToGive: 10
+  deathSfx: {fileID: 8300000, guid: c417ccd28ed02804abe0cc27929c17c3, type: 3}
+  shootSfx: {fileID: 8300000, guid: 492b2dea81e3ea64d8e71f24082d9d04, type: 3}
+  sfxVolume: 1
+  pitchJitter: {x: 0.97, y: 1.03}
