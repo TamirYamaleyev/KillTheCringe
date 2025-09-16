@@ -173,8 +173,7 @@ public class PlayerController : MonoBehaviour
 
     public void GameOver()
     {
-        Debug.Log("Game Over!");
-        Time.timeScale = 0f;
+        SceneController.LoadSceneByName("MainMenu");
     }
 
     void OnTriggerEnter2D(Collider2D other)
