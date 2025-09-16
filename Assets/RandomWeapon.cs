@@ -1,0 +1,22 @@
+using UnityEngine;
+
+public class RandomWeapon : MonoBehaviour
+{
+    private PlayerController.Weapon weaponInBox;
+    public int ammoInBox = 5;
+
+    void Start()
+    {
+        var random = (PlayerController.Weapon[])System.Enum.GetValues(typeof(PlayerController.Weapon));
+        weaponInBox = random[Random.Range(0, random.Length)];
+    }
+
+    void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            collision.GetComponent<PlayerController>().PickUpWeaponBox(weaponInBox, ammoInBox);
+            Destroy(gameObject);
+        }    
+    }
+}

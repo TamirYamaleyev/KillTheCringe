@@ -11,6 +11,8 @@ public class PlayerController : MonoBehaviour
     }
 
     public Weapon currentWeapon = Weapon.Laser;
+    public int plasmaAmmo = 0;
+    public int lightningAmmo = 0;
 
     public GameObject firePoint;
     public GameObject laserProjectile;
@@ -77,11 +79,30 @@ public class PlayerController : MonoBehaviour
                     break;
                 case Weapon.PlasmaCannon:
                     ShootPlasma();
+                    plasmaAmmo--;
                     break;
                 case Weapon.Lightning:
                     ShootLightning();
+                    lightningAmmo--;
                     break;
             }
+        }
+    }
+
+    public void PickUpWeaponBox(Weapon type, int ammo)
+    {
+        switch (type)
+        {
+            case Weapon.PlasmaCannon:
+                plasmaAmmo = ammo;
+                currentWeapon = Weapon.PlasmaCannon;
+                break;
+            case Weapon.Lightning:
+                lightningAmmo = ammo;
+                currentWeapon = Weapon.Lightning;
+                break;
+            default: currentWeapon = Weapon.Laser;
+                break;
         }
     }
 
