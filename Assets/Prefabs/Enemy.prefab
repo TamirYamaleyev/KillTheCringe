@@ -291,4 +291,4 @@ MonoBehaviour:
   firePoint: {fileID: 2541270729811081772}
   scoreToGive: 10
   weaponBox: {fileID: 5774314842497669148, guid: fef8460ff4e994d4e86d1e920b0d915a, type: 3}
-  boxDropChance: 0.02
+  boxDropChance: 0.05

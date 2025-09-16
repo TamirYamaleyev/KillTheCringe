@@ -4,7 +4,6 @@ public class RandomWeapon : MonoBehaviour
 {
     public float objectDestroyDelay = 8f;
     private PlayerController.Weapon weaponInBox;
-    public int ammoInBox = 5;
 
     void Start()
     {
@@ -20,7 +19,7 @@ public class RandomWeapon : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            collision.GetComponent<PlayerController>().PickUpWeaponBox(weaponInBox, ammoInBox);
+            collision.GetComponent<PlayerController>().PickUpWeaponBox(weaponInBox);
             Destroy(gameObject);
         }    
     }

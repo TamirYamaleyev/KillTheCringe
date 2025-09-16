@@ -913,6 +913,7 @@ GameObject:
   - component: {fileID: 1568587961}
   - component: {fileID: 1568587963}
   - component: {fileID: 1568587962}
+  - component: {fileID: 1568587964}
   m_Layer: 5
   m_Name: WeaponIcon
   m_TagString: Untagged
@@ -980,6 +981,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1568587960}
   m_CullTransparentMesh: 1
+--- !u!114 &1568587964
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1568587960}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff094919e21e6584dab1e928acfca446, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  LaserUI: {fileID: 1631826121}
+  PlasmaUI: {fileID: 719859150}
+  LightningUI: {fileID: 1205308490}
+  ammoWidth: 32
 --- !u!1 &1599865821
 GameObject:
   m_ObjectHideFlags: 0
@@ -1805,8 +1822,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lifeUI: {fileID: 0}
   currentWeapon: 0
+  maxAmmo: 5
   plasmaAmmo: 0
   lightningAmmo: 0
+  hudWeapon: {fileID: 0}
   firePoint: {fileID: 427088706}
   laserProjectile: {fileID: 6388165861582273931, guid: ac40cc082cbdad14bb6abd52769f5cd6, type: 3}
   plasmaProjectile: {fileID: 457276027041886230, guid: 37108e15ee9035b48a8bb54b408884a3, type: 3}

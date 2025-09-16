@@ -11,8 +11,10 @@ public class PlayerController : MonoBehaviour
     }
 
     public Weapon currentWeapon = Weapon.Laser;
+    public int maxAmmo = 5;
     public int plasmaAmmo = 0;
     public int lightningAmmo = 0;
+    public HUDWeapon hudWeapon;
 
     public GameObject firePoint;
     public GameObject laserProjectile;
@@ -45,6 +47,8 @@ public class PlayerController : MonoBehaviour
         float screenHalfWidth = cam.orthographicSize * cam.aspect;
 
         horizontalLimit = screenHalfWidth - halfPlayerWidth;
+
+        hudWeapon = FindFirstObjectByType<HUDWeapon>();
     }
 
     // Update is called once per frame
@@ -80,30 +84,36 @@ public class PlayerController : MonoBehaviour
                 case Weapon.PlasmaCannon:
                     ShootPlasma();
                     plasmaAmmo--;
-                    // HUD Reduce ammo
+                    hudWeapon.SetAmmo(Weapon.PlasmaCannon, plasmaAmmo);
+
+                    if (plasmaAmmo <= 0) currentWeapon = Weapon.Laser;
                     break;
                 case Weapon.Lightning:
                     ShootLightning();
                     lightningAmmo--;
-                    // HUD Reduce ammo
+                    hudWeapon.SetAmmo(Weapon.Lightning, lightningAmmo);
+
+                    if (lightningAmmo <= 0) currentWeapon = Weapon.Laser;
                     break;
             }
+            hudWeapon.ChangeWeapon(currentWeapon);
         }
     }
 
-    public void PickUpWeaponBox(Weapon type, int ammo)
+    public void PickUpWeaponBox(Weapon type)
     {
+        hudWeapon.ChangeWeapon(type);
+        hudWeapon.SetAmmo(type, maxAmmo);
+
         switch (type)
         {
             case Weapon.PlasmaCannon:
-                plasmaAmmo = ammo;
+                plasmaAmmo = maxAmmo;
                 currentWeapon = Weapon.PlasmaCannon;
-                // HUD Change icon + max ammo
                 break;
             case Weapon.Lightning:
-                lightningAmmo = ammo;
+                lightningAmmo = maxAmmo;
                 currentWeapon = Weapon.Lightning;
-                // HUD Change icon + max ammo
                 break;
             default: currentWeapon = Weapon.Laser;
                 break;
