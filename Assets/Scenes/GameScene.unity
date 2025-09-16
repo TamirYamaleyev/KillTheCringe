@@ -1015,7 +1015,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25bbc0b4e3a060243886b2bb39d55c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentWeapon: 2
+  currentWeapon: 0
   firePoint: {fileID: 427088706}
   laserProjectile: {fileID: 6388165861582273931, guid: ac40cc082cbdad14bb6abd52769f5cd6, type: 3}
   plasmaProjectile: {fileID: 457276027041886230, guid: 37108e15ee9035b48a8bb54b408884a3, type: 3}
