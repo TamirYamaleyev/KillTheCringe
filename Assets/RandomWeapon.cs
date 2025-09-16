@@ -9,7 +9,9 @@ public class RandomWeapon : MonoBehaviour
     void Start()
     {
         var random = (PlayerController.Weapon[])System.Enum.GetValues(typeof(PlayerController.Weapon));
-        weaponInBox = random[Random.Range(0, random.Length)];
+
+        // First weapon is the default weapon, so start at 1
+        weaponInBox = random[Random.Range(1, random.Length)];
 
         Destroy(gameObject, objectDestroyDelay);
     }

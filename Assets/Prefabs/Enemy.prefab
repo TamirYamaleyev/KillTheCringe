@@ -290,3 +290,5 @@ MonoBehaviour:
   projectile: {fileID: 4122191502934974842, guid: d17a335905da6664e9b2c37c90c2c251, type: 3}
   firePoint: {fileID: 2541270729811081772}
   scoreToGive: 10
+  weaponBox: {fileID: 5774314842497669148, guid: fef8460ff4e994d4e86d1e920b0d915a, type: 3}
+  boxDropChance: 0.02
