@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public LifeController lifeUI;
     public enum Weapon
     {
         Laser,
@@ -26,13 +27,13 @@ public class PlayerController : MonoBehaviour
     private float halfPlayerWidth;
     private float horizontalLimit;
 
-
-
     public Quaternion bulletRotation = Quaternion.Euler(0f, 0f, 90f);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        lifeUI = FindFirstObjectByType<LifeController>();
+
         rb = GetComponent<Rigidbody2D>();
 
         SpriteRenderer sr = GetComponent<SpriteRenderer>();
@@ -106,11 +107,7 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         lives--;
-
-        // Add iFrame
-
-        Debug.Log("Taking Damage");
-        gameObject.GetComponent<SpriteRenderer>().color = new Color(255, 255, 255, lives * 0.25f);
+        lifeUI.UpdateLives(lives);
 
         if (lives <= 0)
         {

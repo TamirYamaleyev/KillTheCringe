@@ -60,27 +60,25 @@ public class EnemyScript : MonoBehaviour
         {
             Destroy(other.gameObject);
             Die();
-            AddScore();
         }
         if (other.gameObject.CompareTag("Lightning"))
         {
             Die();
-            AddScore();
         }
         if (other.gameObject.CompareTag("Plasma"))
         {
             other.GetComponent<PlasmaExplosion>().Explode();
             Die();
-            AddScore();
         }
         if (other.gameObject.CompareTag("Player"))
         {
             other.gameObject.GetComponent<PlayerController>().GameOver();
         }
     }
-    void AddScore()
+    void AddScore(int amount)
     {
-        // Add Score
+        ScoreController sc = FindFirstObjectByType<ScoreController>();
+        sc.UpdateScore(amount);
     }
 
     public void Die()
@@ -88,6 +86,7 @@ public class EnemyScript : MonoBehaviour
         WaveController waveController = FindFirstObjectByType<WaveController>();
         waveController.UnregisterEnemy();
 
+        AddScore(scoreToGive);
         Destroy(gameObject);
 
     }
