@@ -33,9 +33,20 @@ public class PlayerController : MonoBehaviour
 
     public Quaternion bulletRotation = Quaternion.Euler(0f, 0f, 90f);
 
+    public AudioClip laserFireSFX;
+    public AudioClip plasmaFireSFX;
+    public AudioClip lightningFireSFX;
+
+    [Range(0f, 1f)] float sfxVolume = 1f;
+    Vector2 pitchJitter = new Vector2(0.97f, 1.03f);
+
+    AudioSource sfx;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        sfx = GetComponent<AudioSource>();
+
         lifeUI = FindFirstObjectByType<LifeController>();
 
         rb = GetComponent<Rigidbody2D>();
@@ -124,6 +135,7 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = Instantiate(laserProjectile, firePoint.transform.position, bulletRotation);
         bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, bulletSpeed);
+        PlaySFX(laserFireSFX);
         Destroy(bullet, bulletDestroyDelay);
     }
 
@@ -131,12 +143,21 @@ public class PlayerController : MonoBehaviour
     {
         GameObject bullet = Instantiate(plasmaProjectile, firePoint.transform.position, bulletRotation);
         bullet.GetComponent<Rigidbody2D>().linearVelocity = new Vector2(0, bulletSpeed);
+        PlaySFX(plasmaFireSFX);
         Destroy(bullet, bulletDestroyDelay);
     }
 
     void ShootLightning()
     {
         gameObject.GetComponent<LightningWeapon>().FireLightning();
+        PlaySFX(lightningFireSFX);
+    }
+
+    void PlaySFX(AudioClip clip)
+    {
+        if (!clip || sfx == null) return;
+        sfx.pitch = Random.Range(pitchJitter.x, pitchJitter.y);
+        sfx.PlayOneShot(clip, sfxVolume);
     }
 
     public void TakeDamage()

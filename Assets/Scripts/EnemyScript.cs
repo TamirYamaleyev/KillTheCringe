@@ -7,6 +7,7 @@ public class EnemyScript : MonoBehaviour
     private SpriteRenderer sr;
 
     public LayerMask enemyLayer;
+
     // Max vertical screen size in 4k + some leeway
     public float raySize = 2500f;
     public bool canShoot = false;
@@ -46,11 +47,7 @@ public class EnemyScript : MonoBehaviour
         enemySprites = Resources.LoadAll<Sprite>("Sprites/Enemies");
         sr.sprite = enemySprites[Random.Range(0, enemySprites.Length)];
         
-        sfx = gameObject.AddComponent<AudioSource>();
-        sfx.playOnAwake = false;
-        sfx.loop = false;
-        sfx.spatialBlend = 0f;  
-        sfx.dopplerLevel = 0f;
+        sfx = GetComponent<AudioSource>();
     }
 
     void Update()
