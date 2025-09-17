@@ -7,6 +7,7 @@ public class EnemyScript : MonoBehaviour
     private SpriteRenderer sr;
 
     public LayerMask enemyLayer;
+
     // Max vertical screen size in 4k + some leeway
     public float raySize = 2500f;
     public bool canShoot = false;
@@ -26,6 +27,16 @@ public class EnemyScript : MonoBehaviour
     public GameObject firePoint;
 
     public int scoreToGive = 10;
+    
+    // SFX 
+    [Header("SFX")]
+    [SerializeField] AudioClip deathSfx;
+    [SerializeField] AudioClip shootSfx;
+
+    [SerializeField, Range(0f,1f)] float sfxVolume = 1f;
+    [SerializeField] Vector2 pitchJitter = new Vector2(0.97f, 1.03f);
+
+    AudioSource sfx;
 
     public GameObject weaponBox;
     public float boxDropChance = 0.2f;
@@ -35,6 +46,8 @@ public class EnemyScript : MonoBehaviour
         sr = GetComponent<SpriteRenderer>();
         enemySprites = Resources.LoadAll<Sprite>("Sprites/Enemies");
         sr.sprite = enemySprites[Random.Range(0, enemySprites.Length)];
+        
+        sfx = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -92,6 +105,7 @@ public class EnemyScript : MonoBehaviour
         AddScore(scoreToGive);
         CheckIfToDropWeaponBox();
         Destroy(gameObject);
+        PlayLocal(deathSfx);
 
     }
 
@@ -127,6 +141,8 @@ public class EnemyScript : MonoBehaviour
         }
 
         Destroy(projectileInst, bulletDestroyDelay);
+        
+        PlayLocal(shootSfx);
     }
 
     void CheckIfBottom()
@@ -141,5 +157,12 @@ public class EnemyScript : MonoBehaviour
         {
             canShoot = false;
         }
+    }
+    
+    void PlayLocal(AudioClip clip)
+    {
+        if (!clip) return;
+        sfx.pitch = Random.Range(pitchJitter.x, pitchJitter.y);
+        sfx.PlayOneShot(clip, sfxVolume);
     }
 }
